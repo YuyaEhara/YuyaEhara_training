@@ -1,17 +1,26 @@
 <@charset "UTF-8";>
 /* ページ全体 */
-
+/*ページ全体の幅は100%と指定する*/
+/*ページ全体を中央揃えにする*/
 body{
-  width:100%; /*ページ全体の幅は100%と指定する*/
-  text-align:center; /*ページ全体を中央揃えにする*/
+  width:100%;
+  text-align:center;
 }
+
+/*全体の幅を指定する*/
+/*マージンの指定をする、ブラウザ対策*/
+/*全体を左揃えにする。*/
 #room{
-  width: 1000px;	   /*全体の幅を指定する*/
-  margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
-  text-align:left;   /*全体を左揃えにする。*/
+  width: 1000px;
+  margin: 0 auto;
+  text-align:left;
+}
+
+.time {
+  width: 80%;
 }
 /* yepの文字色 */
-span {
+h1 span {
   color: red;
 }
 
@@ -20,23 +29,45 @@ a {
   text-decoration: none;
 }
 
+/* コメント */
+.box-comment h2 {
+  font-size: 20px;
+  width: 100%;
+  border-bottom: 4px #1281f5 solid;
+  font-size: 18px;
+  font-weight: normal;
+
+  /* display:inline; */
+}
+
+.box-comment .bbs-date {
+  float: right;
+}
+
+.rpy-comment {
+  margin-left: 40%;
+  margin-top: 20px;
+}
+
 .dl {
   float: left;
 }
+
 .square_btn {
     position: relative;
     display: inline-block;
     padding: 0.25em 0.5em;
     text-decoration: none;
     color: #FFF;
-    background: #03A9F4;/*色*/
-    border: solid 1px #0f9ada;/*線色*/
+    background: #03A9F4;
+    border: solid 1px #0f9ada;
     border-radius: 4px;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
     text-shadow: 0 1px 0 rgba(0,0,0,0.2);
 }
 
-.square_btn:active {/*押したとき*/
+/*押したとき*/
+.square_btn:active {
     border: solid 1px #03A9F4;
     box-shadow: none;
     text-shadow: none;
@@ -54,26 +85,7 @@ label {
     float: left;
     letter-spacing: 2px;
 }
-/* コメント */
-table {
-  font-size: 20px;
-}
 
-.p {
-  width: 100%;
-  border-top: 4px #1281f5 solid ;
-  font-size: 30px;
-}
-
-table {
-  font-size: 20px;
-}
-
-.p-rpy {
-  width: 100%;
-  border-top: 4px #f51212 solid ;
-  font-size: 30px;
-}
 /* エラー */
 .error {
   color: red;

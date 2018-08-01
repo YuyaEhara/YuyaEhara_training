@@ -1,15 +1,15 @@
 <?php
 session_start();
-require('dbconnect.php');
+require_once('dbconnect.php');
 
 $id = filter_input(INPUT_POST,'id');
 $title = filter_input(INPUT_POST,'title');
 $user_name = filter_input(INPUT_POST,'user_name');
+
 $error = [];
 // $error配列の初期化
 // してあげないとif文が成立しない
 // これが無ければ未入力の時に値が存在しないことになってエラーの元
-
 if (!empty($_POST)) {
   // エラーの確認
   if (filter_input(INPUT_POST,'title') == '') {
@@ -18,26 +18,29 @@ if (!empty($_POST)) {
   if (filter_input(INPUT_POST,'user_name') == '') {
     $error['user_name'] = 'blank';
   }
-  // DB挿入
-  if (empty($error)) {
+
+// 時間
+
+// DB挿入
+if (empty($error)) {
   // これが無いと空のままでもDBに挿入されてしまう。
-  $statement = $db->prepare('INSERT INTO rooms SET title=?, user_name=?, modified=NOW(), created=NOW()');
+  $statement = $db->prepare("INSERT INTO rooms SET title=?, user_name=?, modified=NOW(), created=NOW()");
   $statement->execute(
     array(
-    $_POST['title'],
-    $_POST['user_name'])
-  );
-
-  header('Location: http://192.168.2.52/index.php');
-  exit();
- }
+      $_POST['title'],
+      $_POST['user_name'])
+    );
+    header('Location: http://192.168.2.52/index.php');
+    exit();
+  }
 }
-$posts = $db->query('SELECT id, title, user_name, modified FROM rooms  ORDER BY modified DESC');
-
-
+$stmt = $db->prepare('SELECT id, title, user_name, modified FROM rooms ORDER BY modified DESC');
+$stmt->execute();
+$posts = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+     $posts[] = $row;
+}
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="ja" dir="ltr">
@@ -49,8 +52,8 @@ $posts = $db->query('SELECT id, title, user_name, modified FROM rooms  ORDER BY 
   <body>
     <div id="wrap">
     <header>
-      <a href="index.php"><h1><span>yep</span>BBs</h1></a>
-      <div align="right"><?php echo date('Y/m/d') ?></div>
+      <div style="display: inline-block;"><a href="index.php"><h1><span>yep</span>BBs</h1></a></div>
+      <div class="time" align="right" style="display: inline-block;"><?php echo date('Y/m/d G:i') ?></div>
     </header>
       <div class="contents">
         <div class="rooms-list">
@@ -62,13 +65,10 @@ $posts = $db->query('SELECT id, title, user_name, modified FROM rooms  ORDER BY 
              <tr class="room-detail">
                <td align="left"><a href="room.php?room_id=<?php echo htmlspecialchars($post['id'], ENT_QUOTES); ?>"><?php echo htmlspecialchars($post['title'], ENT_QUOTES); ?></a></td>
                <td align="right"><?php echo htmlspecialchars($post['user_name'], ENT_QUOTES); ?></td>
-               <td align="right"><?php echo htmlspecialchars($post['modified'], ENT_QUOTES) ?></td>
+               <td align="right"><?php echo htmlspecialchars(date("Y/m/d H:i",strtotime($post['modified'])), ENT_QUOTES) ?></td>
              </tr>
            <?php endforeach; ?>
           </table>
-
-
-
         </div>
 
         <div class="room-Registration">
@@ -79,7 +79,7 @@ $posts = $db->query('SELECT id, title, user_name, modified FROM rooms  ORDER BY 
               <?php echo htmlspecialchars(filter_input(INPUT_POST,'id'), ENT_QUOTES); ?>
               <li align="left">
                 <label for="title">ルーム名</label>
-                <input type="text" name="title" size="35" maxlength="20"
+                <input type="text" name="title" size="35" maxlength="50"
                 value="<?php echo htmlspecialchars(filter_input(INPUT_POST,'title'), ENT_QUOTES); ?>"/>
               <?php if (isset($error['title']) && ($error['title'] === 'blank')): ?>
               <!-- $error['title']が存在するか　&& $error['title']のblankが等しいか -->

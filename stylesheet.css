@@ -1,21 +1,33 @@
 <@charset "UTF-8";>
 /* ページ全体 */
-
+/*ページ全体の幅は100%と指定する*/
+/*ページ全体を中央揃えにする*/
 body {
-  width: 100%; /*ページ全体の幅は100%と指定する*/
-  text-align: center; /*ページ全体を中央揃えにする*/
+  width: 100%;
+  text-align: center;
 }
 
+/*全体の幅を指定する*/
+/*マージンの指定をする、ブラウザ対策*/
+/*全体を左揃えにする。*/
 #wrap {
-  width: 1000px;	   /*全体の幅を指定する*/
-  margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
-  text-align: left;   /*全体を左揃えにする。*/
+  width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.time {
+  display: inline-block;
+  align="right";
+  width: 80%;
 }
 
 /* yepの文字色 */
 span {
   color: red;
+  display: inline-block;
 }
+
 /* aタグの線 */
 a {
   text-decoration: none;
@@ -24,14 +36,15 @@ a {
 .dl {
   float: left;
 }
+
 .square_btn {
     position: relative;
     display: inline-block;
     padding: 0.25em 0.5em;
     text-decoration: none;
     color: #FFF;
-    background: #03A9F4;/*色*/
-    border: solid 1px #0f9ada;/*線色*/
+    background: #03A9F4;
+    border: solid 1px #0f9ada;
     border-radius: 4px;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
     text-shadow: 0 1px 0 rgba(0,0,0,0.2);
@@ -43,19 +56,17 @@ a {
     text-shadow: none;
 }
 
-
 ul li {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
+}
+
 label {
     margin-right: 10px;
     width:100px;
     float: left;
 }
-
-
 
 /* ルーム一覧 */
 table{
@@ -71,13 +82,16 @@ table{
   margin-top: 50px;
   margin-bottom: 100px;
 }
+
 td,th{
   padding:10px;
 }
+
 th{
   color:#fff;
   background:#034382;
 }
+
 table tr:nth-child(odd){
   background:#dee2e7;
 }
@@ -85,11 +99,13 @@ table tr:nth-child(odd){
 .room_edit {
   align: left;
 }
+
 /* エラー */
 .error {
   color: red;
   margin-left: 110px;
 }
+
  /* インプットの枠のところ */
 input {
   border: 1px #03A9F4 solid;
