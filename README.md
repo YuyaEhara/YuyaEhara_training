@@ -1,1 +1,0 @@
-# ehara_traninng
